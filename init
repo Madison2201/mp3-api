@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f
+spawn docker-compose run --rm mp3-php-cli php init
+expect "Select the application environment"
+send "0\r"
+expect "Confirm"
+send "yes\r"
+expect eof
