@@ -23,6 +23,6 @@ class m250109_064905_create_tag_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%tag}}');
+        $this->dropTable('{{%tags}}');
     }
 }

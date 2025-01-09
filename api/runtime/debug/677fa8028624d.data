@@ -1,0 +1,863 @@
+a:14:{s:6:"config";s:1476:"a:5:{s:10:"phpVersion";s:6:"8.3.15";s:10:"yiiVersion";s:6:"2.0.51";s:11:"application";a:8:{s:3:"yii";s:6:"2.0.51";s:4:"name";s:14:"My Application";s:7:"version";s:3:"1.0";s:8:"language";s:5:"en-US";s:14:"sourceLanguage";s:5:"en-US";s:7:"charset";s:5:"UTF-8";s:3:"env";s:3:"dev";s:5:"debug";b:1;}s:3:"php";a:5:{s:7:"version";s:6:"8.3.15";s:6:"xdebug";b:1;s:3:"apc";b:0;s:8:"memcache";b:0;s:9:"memcached";b:1;}s:10:"extensions";a:5:{s:23:"yiisoft/yii2-bootstrap5";a:4:{s:4:"name";s:23:"yiisoft/yii2-bootstrap5";s:7:"version";s:7:"2.0.4.0";s:5:"alias";a:1:{s:15:"@yii/bootstrap5";s:51:"/var/www/mp3-api/vendor/yiisoft/yii2-bootstrap5/src";}s:9:"bootstrap";s:40:"yii\bootstrap5\i18n\TranslationBootstrap";}s:18:"yiisoft/yii2-debug";a:3:{s:4:"name";s:18:"yiisoft/yii2-debug";s:7:"version";s:8:"2.1.25.0";s:5:"alias";a:1:{s:10:"@yii/debug";s:46:"/var/www/mp3-api/vendor/yiisoft/yii2-debug/src";}}s:18:"yiisoft/yii2-faker";a:3:{s:4:"name";s:18:"yiisoft/yii2-faker";s:7:"version";s:7:"2.0.5.0";s:5:"alias";a:1:{s:10:"@yii/faker";s:46:"/var/www/mp3-api/vendor/yiisoft/yii2-faker/src";}}s:16:"yiisoft/yii2-gii";a:3:{s:4:"name";s:16:"yiisoft/yii2-gii";s:7:"version";s:7:"2.2.6.0";s:5:"alias";a:1:{s:8:"@yii/gii";s:44:"/var/www/mp3-api/vendor/yiisoft/yii2-gii/src";}}s:26:"yiisoft/yii2-symfonymailer";a:3:{s:4:"name";s:26:"yiisoft/yii2-symfonymailer";s:7:"version";s:7:"2.0.4.0";s:5:"alias";a:1:{s:18:"@yii/symfonymailer";s:54:"/var/www/mp3-api/vendor/yiisoft/yii2-symfonymailer/src";}}}}";s:3:"log";s:16843:"a:1:{s:8:"messages";a:19:{i:0;a:6:{i:0;s:68:"Bootstrap with yii\bootstrap5\i18n\TranslationBootstrap::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1736419330.520034;i:4;a:0:{}i:5;i:901472;}i:1;a:6:{i:0;s:33:"Bootstrap with yii\log\Dispatcher";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1736419330.520242;i:4;a:0:{}i:5;i:908416;}i:2;a:6:{i:0;s:21:"Loading module: debug";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1736419330.520263;i:4;a:0:{}i:5;i:909056;}i:3;a:6:{i:0;s:15:"Session started";i:1;i:4;i:2;s:21:"yii\web\Session::open";i:3;d:1736419330.521403;i:4;a:0:{}i:5;i:947568;}i:4;a:6:{i:0;s:65:"Opening DB connection: pgsql:host=localhost;port=54321;dbname=app";i:1;i:4;i:2;s:23:"yii\db\Connection::open";i:3;d:1736419330.522206;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:961216;}i:7;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'user'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.531781;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:967704;}i:10;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='user'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.543238;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:977784;}i:13;a:6:{i:0;s:53:"SELECT * FROM "user" WHERE ("id"=1) AND ("status"=10)";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.547582;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:986320;}i:16;a:6:{i:0;s:44:"Bootstrap with yii\debug\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1736419330.549393;i:4;a:0:{}i:5;i:998288;}i:17;a:6:{i:0;s:19:"Loading module: gii";i:1;i:8;i:2;s:26:"yii\base\Module::getModule";i:3;d:1736419330.549675;i:4;a:0:{}i:5;i:1010328;}i:18;a:6:{i:0;s:42:"Bootstrap with yii\gii\Module::bootstrap()";i:1;i:8;i:2;s:31:"yii\base\Application::bootstrap";i:3;d:1736419330.549733;i:4;a:0:{}i:5;i:1011136;}i:25;a:6:{i:0;s:30:"Route requested: 'post/create'";i:1;i:8;i:2;s:34:"yii\web\Application::handleRequest";i:3;d:1736419330.549933;i:4;a:0:{}i:5;i:1026288;}i:26;a:6:{i:0;s:25:"Route to run: post/create";i:1;i:8;i:2;s:30:"yii\base\Controller::runAction";i:3;d:1736419330.550301;i:4;a:0:{}i:5;i:1029784;}i:27;a:6:{i:0;s:65:"Rate limit skipped: "user" does not implement RateLimitInterface.";i:1;i:4;i:2;s:37:"yii\filters\RateLimiter::beforeAction";i:3;d:1736419330.550555;i:4;a:0:{}i:5;i:1044616;}i:28;a:6:{i:0;s:62:"Running action: api\controllers\PostController::actionCreate()";i:1;i:8;i:2;s:36:"yii\base\InlineAction::runWithParams";i:3;d:1736419330.550594;i:4;a:0:{}i:5;i:1043176;}i:29;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'post'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.355943;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1086912;}i:32;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='post'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.378856;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1096408;}i:35;a:6:{i:0;s:140:"INSERT INTO "post" ("title", "description", "file", "created_at", "status") VALUES ('test', 'testDescr', NULL, 1736419333, 1) RETURNING "id"";i:1;i:4;i:2;s:21:"yii\db\Command::query";i:3;d:1736419340.833263;i:4;a:3:{i:0;a:5:{s:4:"file";s:52:"/var/www/mp3-api/api/repositories/PostRepository.php";s:4:"line";i:17;s:8:"function";s:4:"save";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:30;s:8:"function";s:4:"save";s:5:"class";s:31:"api\repositories\PostRepository";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1110760;}i:38;a:6:{i:0;s:4210:"PDOException: SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "file" of relation "post" violates not-null constraint
+DETAIL:  Failing row contains (1, test, testDescr, null, 1736419333, null, 1). in /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php:1320
+Stack trace:
+#0 /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php(1320): PDOStatement->execute()
+#1 /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php(1186): yii\db\Command->internalExecute()
+#2 /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php(431): yii\db\Command->queryInternal()
+#3 /var/www/mp3-api/vendor/yiisoft/yii2/db/pgsql/Schema.php(646): yii\db\Command->queryOne()
+#4 /var/www/mp3-api/vendor/yiisoft/yii2/db/ActiveRecord.php(604): yii\db\pgsql\Schema->insert()
+#5 /var/www/mp3-api/vendor/yiisoft/yii2/db/ActiveRecord.php(570): yii\db\ActiveRecord->insertInternal()
+#6 /var/www/mp3-api/vendor/yiisoft/yii2/db/BaseActiveRecord.php(688): yii\db\ActiveRecord->insert()
+#7 /var/www/mp3-api/api/repositories/PostRepository.php(17): yii\db\BaseActiveRecord->save()
+#8 /var/www/mp3-api/api/services/PostService.php(30): api\repositories\PostRepository->save()
+#9 /var/www/mp3-api/api/controllers/PostController.php(51): api\services\PostService->create()
+#10 [internal function]: api\controllers\PostController->actionCreate()
+#11 /var/www/mp3-api/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array()
+#12 /var/www/mp3-api/vendor/yiisoft/yii2/base/Controller.php(178): yii\base\InlineAction->runWithParams()
+#13 /var/www/mp3-api/vendor/yiisoft/yii2/base/Module.php(552): yii\base\Controller->runAction()
+#14 /var/www/mp3-api/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction()
+#15 /var/www/mp3-api/vendor/yiisoft/yii2/base/Application.php(384): yii\web\Application->handleRequest()
+#16 /var/www/mp3-api/api/web/index.php(18): yii\base\Application->run()
+#17 {main}
+
+Next yii\db\IntegrityException: SQLSTATE[23502]: Not null violation: 7 ERROR:  null value in column "file" of relation "post" violates not-null constraint
+DETAIL:  Failing row contains (1, test, testDescr, null, 1736419333, null, 1).
+The SQL being executed was: INSERT INTO "post" ("title", "description", "file", "created_at", "status") VALUES ('test', 'testDescr', NULL, 1736419333, 1) RETURNING "id" in /var/www/mp3-api/vendor/yiisoft/yii2/db/Schema.php:676
+Stack trace:
+#0 /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php(1325): yii\db\Schema->convertException()
+#1 /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php(1186): yii\db\Command->internalExecute()
+#2 /var/www/mp3-api/vendor/yiisoft/yii2/db/Command.php(431): yii\db\Command->queryInternal()
+#3 /var/www/mp3-api/vendor/yiisoft/yii2/db/pgsql/Schema.php(646): yii\db\Command->queryOne()
+#4 /var/www/mp3-api/vendor/yiisoft/yii2/db/ActiveRecord.php(604): yii\db\pgsql\Schema->insert()
+#5 /var/www/mp3-api/vendor/yiisoft/yii2/db/ActiveRecord.php(570): yii\db\ActiveRecord->insertInternal()
+#6 /var/www/mp3-api/vendor/yiisoft/yii2/db/BaseActiveRecord.php(688): yii\db\ActiveRecord->insert()
+#7 /var/www/mp3-api/api/repositories/PostRepository.php(17): yii\db\BaseActiveRecord->save()
+#8 /var/www/mp3-api/api/services/PostService.php(30): api\repositories\PostRepository->save()
+#9 /var/www/mp3-api/api/controllers/PostController.php(51): api\services\PostService->create()
+#10 [internal function]: api\controllers\PostController->actionCreate()
+#11 /var/www/mp3-api/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array()
+#12 /var/www/mp3-api/vendor/yiisoft/yii2/base/Controller.php(178): yii\base\InlineAction->runWithParams()
+#13 /var/www/mp3-api/vendor/yiisoft/yii2/base/Module.php(552): yii\base\Controller->runAction()
+#14 /var/www/mp3-api/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction()
+#15 /var/www/mp3-api/vendor/yiisoft/yii2/base/Application.php(384): yii\web\Application->handleRequest()
+#16 /var/www/mp3-api/api/web/index.php(18): yii\base\Application->run()
+#17 {main}
+Additional Information:
+Array
+(
+    [0] => 23502
+    [1] => 7
+    [2] => ERROR:  null value in column "file" of relation "post" violates not-null constraint
+DETAIL:  Failing row contains (1, test, testDescr, null, 1736419333, null, 1).
+)
+";i:1;i:1;i:2;s:25:"yii\db\IntegrityException";i:3;d:1736419341.675572;i:4;a:0:{}i:5;i:852368;}}}";s:9:"profiling";s:21572:"a:3:{s:6:"memory";i:1183328;s:4:"time";d:11.163238048553467;s:8:"messages";a:14:{i:5;a:6:{i:0;s:65:"Opening DB connection: pgsql:host=localhost;port=54321;dbname=app";i:1;i:80;i:2;s:23:"yii\db\Connection::open";i:3;d:1736419330.522228;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:962024;}i:6;a:6:{i:0;s:65:"Opening DB connection: pgsql:host=localhost;port=54321;dbname=app";i:1;i:96;i:2;s:23:"yii\db\Connection::open";i:3;d:1736419330.531583;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:963680;}i:8;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'user'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.531819;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:968960;}i:9;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'user'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.542631;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:987160;}i:11;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='user'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.543295;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:978952;}i:12;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='user'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.546867;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:980192;}i:14;a:6:{i:0;s:53:"SELECT * FROM "user" WHERE ("id"=1) AND ("status"=10)";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.547619;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:987880;}i:15;a:6:{i:0;s:53:"SELECT * FROM "user" WHERE ("id"=1) AND ("status"=10)";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.548399;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:990432;}i:30;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'post'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.356114;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1088832;}i:31;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'post'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.37701;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1102664;}i:33;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='post'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.379014;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1098968;}i:34;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='post'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.391392;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1100960;}i:36;a:6:{i:0;s:140:"INSERT INTO "post" ("title", "description", "file", "created_at", "status") VALUES ('test', 'testDescr', NULL, 1736419333, 1) RETURNING "id"";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419340.833397;i:4;a:3:{i:0;a:5:{s:4:"file";s:52:"/var/www/mp3-api/api/repositories/PostRepository.php";s:4:"line";i:17;s:8:"function";s:4:"save";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:30;s:8:"function";s:4:"save";s:5:"class";s:31:"api\repositories\PostRepository";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1111944;}i:37;a:6:{i:0;s:140:"INSERT INTO "post" ("title", "description", "file", "created_at", "status") VALUES ('test', 'testDescr', NULL, 1736419333, 1) RETURNING "id"";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419340.869578;i:4;a:3:{i:0;a:5:{s:4:"file";s:52:"/var/www/mp3-api/api/repositories/PostRepository.php";s:4:"line";i:17;s:8:"function";s:4:"save";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:30;s:8:"function";s:4:"save";s:5:"class";s:31:"api\repositories\PostRepository";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1129928;}}}";s:2:"db";s:20809:"a:1:{s:8:"messages";a:12:{i:8;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'user'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.531819;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:968960;}i:9;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'user'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.542631;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:987160;}i:11;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='user'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.543295;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:978952;}i:12;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='user'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.546867;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:980192;}i:14;a:6:{i:0;s:53:"SELECT * FROM "user" WHERE ("id"=1) AND ("status"=10)";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.547619;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:987880;}i:15;a:6:{i:0;s:53:"SELECT * FROM "user" WHERE ("id"=1) AND ("status"=10)";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419330.548399;i:4;a:1:{i:0;a:5:{s:4:"file";s:39:"/var/www/mp3-api/common/models/User.php";s:4:"line";i:67;s:8:"function";s:7:"findOne";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"::";}}i:5;i:990432;}i:30;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'post'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.356114;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1088832;}i:31;a:6:{i:0;s:2810:"SELECT
+    d.nspname AS table_schema,
+    c.relname AS table_name,
+    a.attname AS column_name,
+    COALESCE(td.typname, tb.typname, t.typname) AS data_type,
+    COALESCE(td.typtype, tb.typtype, t.typtype) AS type_type,
+    (SELECT nspname FROM pg_namespace WHERE oid = COALESCE(td.typnamespace, tb.typnamespace, t.typnamespace)) AS type_scheme,
+    a.attlen AS character_maximum_length,
+    pg_catalog.col_description(c.oid, a.attnum) AS column_comment,
+    a.atttypmod AS modifier,
+    a.attnotnull = false AS is_nullable,
+    CAST(pg_get_expr(ad.adbin, ad.adrelid) AS varchar) AS column_default,
+    coalesce(pg_get_expr(ad.adbin, ad.adrelid) ~ 'nextval',false) OR attidentity != '' AS is_autoinc,
+    pg_get_serial_sequence(quote_ident(d.nspname) || '.' || quote_ident(c.relname), a.attname) AS sequence_name,
+    CASE WHEN COALESCE(td.typtype, tb.typtype, t.typtype) = 'e'::char
+        THEN array_to_string((SELECT array_agg(enumlabel) FROM pg_enum WHERE enumtypid = COALESCE(td.oid, tb.oid, a.atttypid))::varchar[], ',')
+        ELSE NULL
+    END AS enum_values,
+    CASE atttypid
+         WHEN 21 /*int2*/ THEN 16
+         WHEN 23 /*int4*/ THEN 32
+         WHEN 20 /*int8*/ THEN 64
+         WHEN 1700 /*numeric*/ THEN
+              CASE WHEN atttypmod = -1
+               THEN null
+               ELSE ((atttypmod - 4) >> 16) & 65535
+               END
+         WHEN 700 /*float4*/ THEN 24 /*FLT_MANT_DIG*/
+         WHEN 701 /*float8*/ THEN 53 /*DBL_MANT_DIG*/
+         ELSE null
+      END   AS numeric_precision,
+      CASE
+        WHEN atttypid IN (21, 23, 20) THEN 0
+        WHEN atttypid IN (1700) THEN
+        CASE
+            WHEN atttypmod = -1 THEN null
+            ELSE (atttypmod - 4) & 65535
+        END
+           ELSE null
+      END AS numeric_scale,
+    CAST(
+             information_schema._pg_char_max_length(information_schema._pg_truetypid(a, t), information_schema._pg_truetypmod(a, t))
+             AS numeric
+    ) AS size,
+    a.attnum = any (ct.conkey) as is_pkey,
+    COALESCE(NULLIF(a.attndims, 0), NULLIF(t.typndims, 0), (t.typcategory='A')::int) AS dimension
+FROM
+    pg_class c
+    LEFT JOIN pg_attribute a ON a.attrelid = c.oid
+    LEFT JOIN pg_attrdef ad ON a.attrelid = ad.adrelid AND a.attnum = ad.adnum
+    LEFT JOIN pg_type t ON a.atttypid = t.oid
+    LEFT JOIN pg_type tb ON (a.attndims > 0 OR t.typcategory='A') AND t.typelem > 0 AND t.typelem = tb.oid OR t.typbasetype > 0 AND t.typbasetype = tb.oid
+    LEFT JOIN pg_type td ON t.typndims > 0 AND t.typbasetype > 0 AND tb.typelem = td.oid
+    LEFT JOIN pg_namespace d ON d.oid = c.relnamespace
+    LEFT JOIN pg_constraint ct ON ct.conrelid = c.oid AND ct.contype = 'p'
+WHERE
+    a.attnum > 0 AND t.typname != '' AND NOT a.attisdropped
+    AND c.relname = 'post'
+    AND d.nspname = 'public'
+ORDER BY
+    a.attnum;";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.37701;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1102664;}i:33;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='post'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.379014;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1098968;}i:34;a:6:{i:0;s:872:"select
+    ct.conname as constraint_name,
+    a.attname as column_name,
+    fc.relname as foreign_table_name,
+    fns.nspname as foreign_table_schema,
+    fa.attname as foreign_column_name
+from
+    (SELECT ct.conname, ct.conrelid, ct.confrelid, ct.conkey, ct.contype, ct.confkey, generate_subscripts(ct.conkey, 1) AS s
+       FROM pg_constraint ct
+    ) AS ct
+    inner join pg_class c on c.oid=ct.conrelid
+    inner join pg_namespace ns on c.relnamespace=ns.oid
+    inner join pg_attribute a on a.attrelid=ct.conrelid and a.attnum = ct.conkey[ct.s]
+    left join pg_class fc on fc.oid=ct.confrelid
+    left join pg_namespace fns on fc.relnamespace=fns.oid
+    left join pg_attribute fa on fa.attrelid=ct.confrelid and fa.attnum = ct.confkey[ct.s]
+where
+    ct.contype='f'
+    and c.relname='post'
+    and ns.nspname='public'
+order by
+    fns.nspname, fc.relname, a.attnum";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419333.391392;i:4;a:3:{i:0;a:5:{s:4:"file";s:36:"/var/www/mp3-api/api/models/Post.php";s:4:"line";i:27;s:8:"function";s:5:"__set";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:25;s:8:"function";s:6:"create";s:5:"class";s:15:"api\models\Post";s:4:"type";s:2:"::";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1100960;}i:36;a:6:{i:0;s:140:"INSERT INTO "post" ("title", "description", "file", "created_at", "status") VALUES ('test', 'testDescr', NULL, 1736419333, 1) RETURNING "id"";i:1;i:80;i:2;s:21:"yii\db\Command::query";i:3;d:1736419340.833397;i:4;a:3:{i:0;a:5:{s:4:"file";s:52:"/var/www/mp3-api/api/repositories/PostRepository.php";s:4:"line";i:17;s:8:"function";s:4:"save";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:30;s:8:"function";s:4:"save";s:5:"class";s:31:"api\repositories\PostRepository";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1111944;}i:37;a:6:{i:0;s:140:"INSERT INTO "post" ("title", "description", "file", "created_at", "status") VALUES ('test', 'testDescr', NULL, 1736419333, 1) RETURNING "id"";i:1;i:96;i:2;s:21:"yii\db\Command::query";i:3;d:1736419340.869578;i:4;a:3:{i:0;a:5:{s:4:"file";s:52:"/var/www/mp3-api/api/repositories/PostRepository.php";s:4:"line";i:17;s:8:"function";s:4:"save";s:5:"class";s:23:"yii\db\BaseActiveRecord";s:4:"type";s:2:"->";}i:1;a:5:{s:4:"file";s:45:"/var/www/mp3-api/api/services/PostService.php";s:4:"line";i:30;s:8:"function";s:4:"save";s:5:"class";s:31:"api\repositories\PostRepository";s:4:"type";s:2:"->";}i:2;a:5:{s:4:"file";s:51:"/var/www/mp3-api/api/controllers/PostController.php";s:4:"line";i:51;s:8:"function";s:6:"create";s:5:"class";s:24:"api\services\PostService";s:4:"type";s:2:"->";}}i:5;i:1129928;}}}";s:5:"event";s:2951:"a:17:{i:0;a:5:{s:4:"time";d:1736419330.521918;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"yii\db\ActiveQuery";}i:1;a:5:{s:4:"time";d:1736419330.531572;s:4:"name";s:9:"afterOpen";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:17:"yii\db\Connection";}i:2;a:5:{s:4:"time";d:1736419330.548756;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"common\models\User";}i:3;a:5:{s:4:"time";d:1736419330.548824;s:4:"name";s:9:"afterFind";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"common\models\User";}i:4;a:5:{s:4:"time";d:1736419330.549222;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"common\models\User";}i:5;a:5:{s:4:"time";d:1736419330.549804;s:4:"name";s:13:"beforeRequest";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:19:"yii\web\Application";}i:6;a:5:{s:4:"time";d:1736419330.550341;s:4:"name";s:12:"beforeAction";s:5:"class";s:20:"yii\base\ActionEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:19:"yii\web\Application";}i:7;a:5:{s:4:"time";d:1736419330.550581;s:4:"name";s:12:"beforeAction";s:5:"class";s:20:"yii\base\ActionEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:30:"api\controllers\PostController";}i:8;a:5:{s:4:"time";d:1736419331.699324;s:4:"name";s:14:"beforeValidate";s:5:"class";s:19:"yii\base\ModelEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"api\forms\PostForm";}i:9;a:5:{s:4:"time";d:1736419331.699549;s:4:"name";s:13:"afterValidate";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:18:"api\forms\PostForm";}i:10;a:5:{s:4:"time";d:1736419333.355594;s:4:"name";s:4:"init";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:15:"api\models\Post";}i:11;a:5:{s:4:"time";d:1736419340.831973;s:4:"name";s:14:"beforeValidate";s:5:"class";s:19:"yii\base\ModelEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:15:"api\models\Post";}i:12;a:5:{s:4:"time";d:1736419340.832143;s:4:"name";s:13:"afterValidate";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:15:"api\models\Post";}i:13;a:5:{s:4:"time";d:1736419340.832226;s:4:"name";s:12:"beforeInsert";s:5:"class";s:19:"yii\base\ModelEvent";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:15:"api\models\Post";}i:14;a:5:{s:4:"time";d:1736419341.675852;s:4:"name";s:10:"beforeSend";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:16:"yii\web\Response";}i:15;a:5:{s:4:"time";d:1736419341.678032;s:4:"name";s:12:"afterPrepare";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:16:"yii\web\Response";}i:16;a:5:{s:4:"time";d:1736419341.679233;s:4:"name";s:9:"afterSend";s:5:"class";s:14:"yii\base\Event";s:8:"isStatic";s:1:"0";s:11:"senderClass";s:16:"yii\web\Response";}}";s:4:"mail";s:6:"a:0:{}";s:8:"timeline";s:91:"a:3:{s:5:"start";d:1736419330.518982;s:3:"end";d:1736419341.682272;s:6:"memory";i:1183328;}";s:4:"dump";s:6:"a:0:{}";s:6:"router";s:1259:"a:3:{s:8:"messages";a:6:{i:19;a:6:{i:0;a:3:{s:4:"rule";s:3:"gii";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1736419330.549885;i:4;a:0:{}i:5;i:1023808;}i:20;a:6:{i:0;a:3:{s:4:"rule";s:12:"gii/<id:\w+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1736419330.549897;i:4;a:0:{}i:5;i:1024400;}i:21;a:6:{i:0;a:3:{s:4:"rule";s:41:"gii/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1736419330.549905;i:4;a:0:{}i:5;i:1024992;}i:22;a:6:{i:0;a:3:{s:4:"rule";s:5:"debug";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1736419330.549912;i:4;a:0:{}i:5;i:1025584;}i:23;a:6:{i:0;a:3:{s:4:"rule";s:43:"debug/<controller:[\w\-]+>/<action:[\w\-]+>";s:5:"match";b:0;s:6:"parent";N;}i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1736419330.54992;i:4;a:0:{}i:5;i:1026176;}i:24;a:6:{i:0;s:55:"No matching URL rules. Using default URL parsing logic.";i:1;i:8;i:2;s:32:"yii\web\UrlManager::parseRequest";i:3;d:1736419330.549924;i:4;a:0:{}i:5;i:1026392;}}s:5:"route";s:11:"post/create";s:6:"action";s:46:"api\controllers\PostController::actionCreate()";}";s:7:"request";s:4212:"a:15:{s:7:"flashes";a:0:{}s:10:"statusCode";i:500;s:14:"requestHeaders";a:10:{s:14:"content-length";s:3:"283";s:6:"cookie";s:153:"_csrf=j1HYZGJxYf7LxgAbZdvespLIbASoDL4a; _identity-api=%5B1%2C%22LmwJtPVJMrV-86r2BCbk__B4ecItxqEj%22%2C2592000%5D; advanced-api=iloskbrgpc89dcv3kskt15oq15";s:12:"content-type";s:80:"multipart/form-data; boundary=--------------------------665370261276207525906898";s:10:"connection";s:10:"keep-alive";s:15:"accept-encoding";s:17:"gzip, deflate, br";s:4:"host";s:9:"mp3.local";s:13:"postman-token";s:36:"fb0ccee2-27e8-4097-8f48-bb96046699fc";s:6:"accept";s:3:"*/*";s:10:"user-agent";s:21:"PostmanRuntime/7.37.3";s:12:"x-csrf-token";s:0:"";}s:15:"responseHeaders";a:10:{s:12:"X-Powered-By";s:10:"PHP/8.3.15";s:7:"Expires";s:29:"Thu, 19 Nov 1981 08:52:00 GMT";s:13:"Cache-Control";s:35:"no-store, no-cache, must-revalidate";s:6:"Pragma";s:8:"no-cache";s:4:"Vary";s:6:"Accept";s:12:"Content-Type";s:31:"application/json; charset=UTF-8";s:11:"X-Debug-Tag";s:13:"677fa8028624d";s:16:"X-Debug-Duration";s:6:"11,160";s:12:"X-Debug-Link";s:37:"/debug/default/view?tag=677fa8028624d";s:10:"Set-Cookie";s:160:"_identity-api=%5B1%2C%22LmwJtPVJMrV-86r2BCbk__B4ecItxqEj%22%2C2592000%5D; expires=Sat, 08 Feb 2025 10:42:10 GMT; Max-Age=2591989; path=/; HttpOnly; SameSite=Lax";}s:5:"route";s:11:"post/create";s:6:"action";s:46:"api\controllers\PostController::actionCreate()";s:12:"actionParams";a:0:{}s:7:"general";a:5:{s:6:"method";s:4:"POST";s:6:"isAjax";b:0;s:6:"isPjax";b:0;s:7:"isFlash";b:0;s:18:"isSecureConnection";b:0;}s:11:"requestBody";a:0:{}s:6:"SERVER";a:46:{s:4:"USER";s:6:"apache";s:4:"HOME";s:16:"/usr/share/httpd";s:11:"SCRIPT_NAME";s:10:"/index.php";s:11:"REQUEST_URI";s:12:"/post/create";s:12:"QUERY_STRING";s:15:"url=post/create";s:14:"REQUEST_METHOD";s:4:"POST";s:15:"SERVER_PROTOCOL";s:8:"HTTP/1.1";s:17:"GATEWAY_INTERFACE";s:7:"CGI/1.1";s:21:"REDIRECT_QUERY_STRING";s:15:"url=post/create";s:12:"REDIRECT_URL";s:12:"/post/create";s:11:"REMOTE_PORT";s:5:"48662";s:15:"SCRIPT_FILENAME";s:34:"/var/www/mp3-api/api/web/index.php";s:12:"SERVER_ADMIN";s:14:"root@localhost";s:21:"CONTEXT_DOCUMENT_ROOT";s:24:"/var/www/mp3-api/api/web";s:14:"CONTEXT_PREFIX";s:0:"";s:14:"REQUEST_SCHEME";s:4:"http";s:13:"DOCUMENT_ROOT";s:24:"/var/www/mp3-api/api/web";s:11:"REMOTE_ADDR";s:9:"127.0.0.1";s:11:"SERVER_PORT";s:2:"80";s:11:"SERVER_ADDR";s:9:"127.0.0.1";s:11:"SERVER_NAME";s:9:"mp3.local";s:15:"SERVER_SOFTWARE";s:42:"Apache/2.4.62 (Fedora Linux) OpenSSL/3.2.2";s:16:"SERVER_SIGNATURE";s:0:"";s:4:"PATH";s:73:"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/var/lib/snapd/snap/bin";s:14:"CONTENT_LENGTH";s:3:"283";s:11:"HTTP_COOKIE";s:153:"_csrf=j1HYZGJxYf7LxgAbZdvespLIbASoDL4a; _identity-api=%5B1%2C%22LmwJtPVJMrV-86r2BCbk__B4ecItxqEj%22%2C2592000%5D; advanced-api=iloskbrgpc89dcv3kskt15oq15";s:12:"CONTENT_TYPE";s:80:"multipart/form-data; boundary=--------------------------665370261276207525906898";s:15:"HTTP_CONNECTION";s:10:"keep-alive";s:20:"HTTP_ACCEPT_ENCODING";s:17:"gzip, deflate, br";s:9:"HTTP_HOST";s:9:"mp3.local";s:18:"HTTP_POSTMAN_TOKEN";s:36:"fb0ccee2-27e8-4097-8f48-bb96046699fc";s:11:"HTTP_ACCEPT";s:3:"*/*";s:15:"HTTP_USER_AGENT";s:21:"PostmanRuntime/7.37.3";s:17:"HTTP_X_CSRF_TOKEN";s:0:"";s:17:"proxy-nokeepalive";s:1:"1";s:10:"SCRIPT_URI";s:28:"http://mp3.local/post/create";s:10:"SCRIPT_URL";s:12:"/post/create";s:9:"UNIQUE_ID";s:27:"Z3-oAmP0b2JRDw7U9WCUxgAAAIg";s:15:"REDIRECT_STATUS";s:3:"200";s:19:"REDIRECT_SCRIPT_URI";s:28:"http://mp3.local/post/create";s:19:"REDIRECT_SCRIPT_URL";s:12:"/post/create";s:18:"REDIRECT_UNIQUE_ID";s:27:"Z3-oAmP0b2JRDw7U9WCUxgAAAIg";s:9:"FCGI_ROLE";s:9:"RESPONDER";s:8:"PHP_SELF";s:10:"/index.php";s:18:"REQUEST_TIME_FLOAT";d:1736419330.454154;s:12:"REQUEST_TIME";i:1736419330;}s:3:"GET";a:1:{s:3:"url";s:11:"post/create";}s:4:"POST";a:2:{s:5:"title";s:4:"test";s:11:"description";s:9:"testDescr";}s:6:"COOKIE";a:3:{s:5:"_csrf";s:32:"j1HYZGJxYf7LxgAbZdvespLIbASoDL4a";s:13:"_identity-api";s:46:"[1,"LmwJtPVJMrV-86r2BCbk__B4ecItxqEj",2592000]";s:12:"advanced-api";s:26:"iloskbrgpc89dcv3kskt15oq15";}s:5:"FILES";a:0:{}s:7:"SESSION";a:3:{s:7:"__flash";a:0:{}s:4:"__id";i:1;s:9:"__authKey";s:32:"LmwJtPVJMrV-86r2BCbk__B4ecItxqEj";}}";s:4:"user";s:1258:"a:5:{s:2:"id";i:1;s:8:"identity";a:10:{s:2:"id";s:1:"1";s:8:"username";s:10:"'testuser'";s:8:"auth_key";s:34:"'LmwJtPVJMrV-86r2BCbk__B4ecItxqEj'";s:13:"password_hash";s:62:"'$2y$13$348fcxLXnGQ7fF5S9S9.cuGr9lFlH0gBg5a/N4T3fDc.mPS.kzkVm'";s:20:"password_reset_token";s:4:"null";s:5:"email";s:22:"'testuser@example.com'";s:6:"status";s:2:"10";s:10:"created_at";s:10:"1736411296";s:10:"updated_at";s:10:"1736411296";s:18:"verification_token";s:4:"null";}s:10:"attributes";a:10:{i:0;a:2:{s:9:"attribute";s:2:"id";s:5:"label";s:2:"Id";}i:1;a:2:{s:9:"attribute";s:8:"username";s:5:"label";s:8:"Username";}i:2;a:2:{s:9:"attribute";s:8:"auth_key";s:5:"label";s:8:"Auth Key";}i:3;a:2:{s:9:"attribute";s:13:"password_hash";s:5:"label";s:13:"Password Hash";}i:4;a:2:{s:9:"attribute";s:20:"password_reset_token";s:5:"label";s:20:"Password Reset Token";}i:5;a:2:{s:9:"attribute";s:5:"email";s:5:"label";s:5:"Email";}i:6;a:2:{s:9:"attribute";s:6:"status";s:5:"label";s:6:"Status";}i:7;a:2:{s:9:"attribute";s:10:"created_at";s:5:"label";s:10:"Created At";}i:8;a:2:{s:9:"attribute";s:10:"updated_at";s:5:"label";s:10:"Updated At";}i:9;a:2:{s:9:"attribute";s:18:"verification_token";s:5:"label";s:18:"Verification Token";}}s:13:"rolesProvider";N;s:19:"permissionsProvider";N;}";s:5:"asset";s:6:"a:0:{}";s:7:"summary";a:13:{s:3:"tag";s:13:"677fa8028624d";s:3:"url";s:28:"http://mp3.local/post/create";s:4:"ajax";i:0;s:6:"method";s:4:"POST";s:2:"ip";s:9:"127.0.0.1";s:4:"time";d:1736419330.454154;s:10:"statusCode";i:500;s:8:"sqlCount";i:6;s:21:"excessiveCallersCount";i:0;s:9:"mailCount";i:0;s:9:"mailFiles";a:0:{}s:10:"peakMemory";i:1183328;s:14:"processingTime";d:11.163238048553467;}s:10:"exceptions";a:0:{}}
