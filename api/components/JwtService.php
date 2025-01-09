@@ -6,7 +6,7 @@ use Firebase\JWT\Key;
 
 class JwtService
 {
-    private string $key = 'your-secret-key';
+    private string $key = 'Kw6Fb3QmZmLAKd4HFTS2lmI_cm3Id5xQ';
     private string $issuer = 'http://your-domain.com';
     private int $expiration = 3600;
 

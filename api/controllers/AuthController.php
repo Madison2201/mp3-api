@@ -2,16 +2,24 @@
 
 namespace api\controllers;
 
-use api\components\JwtService;
-use api\models\User;
+use api\interface\services\AuthServiceInterface;
+use api\services\AuthService;
 use common\models\LoginForm;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
-use yii\web\UnauthorizedHttpException;
+use yii\web\Response;
 
 class AuthController extends Controller
 {
+
+    private AuthService $service;
+
+    public function __construct($id, $module, AuthServiceInterface $service, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
     public function behaviors()
     {
         return array_merge(
@@ -34,15 +42,15 @@ class AuthController extends Controller
     {
         $form = new LoginForm();
         $form->setAttributes(Yii::$app->request->post());
-        $body = Yii::$app->request->post();
+        if ($form->validate()) {
+            return $this->service->auth($form);
 
-        $user = User::findOne(['email' => $body['email']]);
-        if (!$user || !$user->validatePassword($body['password'])) {
-            return ['error' => 'Invalid email or password'];
         }
 
-        $token = Yii::$app->jwt->createToken(['user_id' => $user->id]);
-
-        return ['token' => $token];
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'success' => false,
+            'errors' => $form->getErrors(),
+        ];
     }
 }

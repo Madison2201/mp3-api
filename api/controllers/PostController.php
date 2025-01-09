@@ -9,6 +9,7 @@ use api\services\PostService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
+use yii\web\Response;
 
 class PostController extends Controller
 {
@@ -57,7 +58,7 @@ class PostController extends Controller
             return $this->redirect(['view', 'id' => $post->id]);
 
         }
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        Yii::$app->response->format = Response::FORMAT_JSON;
         return [
             'success' => false,
             'errors' => $form->getErrors(),

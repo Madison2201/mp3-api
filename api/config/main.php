@@ -1,8 +1,12 @@
 <?php
 
+use api\interface\repositories\UserRepositoryInterface;
 use api\interface\repositories\PostRepositoryInterface;
+use api\interface\services\AuthServiceInterface;
 use api\interface\services\PostServiceInterface;
 use api\repositories\PostRepository;
+use api\repositories\UserRepository;
+use api\services\AuthService;
 use api\services\PostService;
 
 $params = array_merge(
@@ -62,6 +66,8 @@ return [
         'definitions' => [
             PostServiceInterface::class => PostService::class,
             PostRepositoryInterface::class => PostRepository::class,
+            AuthServiceInterface::class => AuthService::class,
+            UserRepositoryInterface::class => UserRepository::class,
         ],
     ],
     'params' => $params,

@@ -26,7 +26,7 @@ class LoginForm extends Model
             [['email', 'password'], 'required'],
             ['rememberMe', 'boolean'],
             ['email', 'email'],
-            ['password_hash', 'string', 'min' => 6],
+            ['password', 'string', 'min' => 6],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
@@ -44,7 +44,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, 'Incorrect email or password.');
             }
         }
     }
@@ -75,5 +75,15 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->getUser()->id;
+    }
+
+    public function getUserName(): string
+    {
+        return $this->getUser()->username;
     }
 }
