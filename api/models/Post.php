@@ -43,9 +43,27 @@ class Post extends ActiveRecord
         $this->status = $status;
         $this->updated_at = time();
     }
+    public function fields()
+    {
+        return [
+            'id',
+            'title',
+            'description',
+            'status',
+            'created_at' => function () {
+                return date('Y-m-d H:i:s', $this->created_at);
+            },
+        ];
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::class, ['id' => 'id_tag'])
+            ->viaTable('tag_assignments', ['id_post' => 'id']);
+    }
 
     public function extraFields()
     {
-        return ['title', 'description', 'file'];
+        return ['tags'];
     }
 }

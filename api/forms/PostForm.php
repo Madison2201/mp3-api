@@ -4,6 +4,7 @@ namespace api\forms;
 
 use api\models\Post;
 use yii\base\Model;
+use yii\web\ForbiddenHttpException;
 
 class PostForm extends Model
 {
@@ -44,7 +45,7 @@ class PostForm extends Model
     public function validateUserId($attribute, $params): void
     {
         if ($this->user_id !== \Yii::$app->user->id) {
-            $this->addError($attribute, 'Вы не можете производить данное действие');
+            throw new ForbiddenHttpException('Вы не можете производить данное действие');
         }
     }
 }

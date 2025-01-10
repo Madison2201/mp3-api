@@ -21,5 +21,8 @@ mp3-composer-install:
 dev-init:
 	docker-compose run --rm mp3-php-cli php init
 
-migrate:
+migrate-up:
 	docker-compose run --rm mp3-php-cli ./yii migrate
+
+migrate-down:
+	docker-compose run --rm mp3-php-cli ./yii migrate/down 6

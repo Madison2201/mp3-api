@@ -1,13 +1,21 @@
 <?php
 
+use api\interface\repositories\TagAssignmentsRepositoryInterface;
+use api\interface\repositories\TagRepositoryInterface;
 use api\interface\repositories\UserRepositoryInterface;
 use api\interface\repositories\PostRepositoryInterface;
 use api\interface\services\AuthServiceInterface;
 use api\interface\services\PostServiceInterface;
+use api\interface\services\TagAssignmentsServiceInterface;
+use api\interface\services\TagServiceInterface;
 use api\repositories\PostRepository;
+use api\repositories\TagAssignmentsRepository;
+use api\repositories\TagRepository;
 use api\repositories\UserRepository;
 use api\services\AuthService;
 use api\services\PostService;
+use api\services\TagAssignmentsService;
+use api\services\TagService;
 
 $params = array_merge(
     require __DIR__ . '/../../api/config/params.php',
@@ -77,6 +85,10 @@ return [
             PostRepositoryInterface::class => PostRepository::class,
             AuthServiceInterface::class => AuthService::class,
             UserRepositoryInterface::class => UserRepository::class,
+            TagServiceInterface::class => TagService::class,
+            TagRepositoryInterface::class => TagRepository::class,
+            TagAssignmentsServiceInterface::class => TagAssignmentsService::class,
+            TagAssignmentsRepositoryInterface::class => TagAssignmentsRepository::class,
         ],
     ],
     'params' => $params,

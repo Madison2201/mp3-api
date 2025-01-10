@@ -5,6 +5,7 @@ namespace api\repositories;
 use api\interface\repositories\PostRepositoryInterface;
 use api\models\Post;
 use yii\db\StaleObjectException;
+use yii\web\NotFoundHttpException;
 
 class PostRepository implements PostRepositoryInterface
 {
@@ -16,7 +17,7 @@ class PostRepository implements PostRepositoryInterface
     public function getById(int $id): Post
     {
         if (!$post = Post::findOne($id)) {
-            throw new \RuntimeException('Post is not found.');
+            throw new NotFoundHttpException('Post is not found.');
         }
         return $post;
     }

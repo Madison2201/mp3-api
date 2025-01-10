@@ -7,6 +7,7 @@ use api\interface\repositories\PostRepositoryInterface;
 use api\interface\services\PostServiceInterface;
 use api\models\Post;
 use api\repositories\PostRepository;
+use yii\web\ForbiddenHttpException;
 
 class PostService implements PostServiceInterface
 {
@@ -52,6 +53,9 @@ class PostService implements PostServiceInterface
     public function remove(int $id): void
     {
         $post = $this->posts->getById($id);
+        if ($post->user_id !== \Yii::$app->user->id) {
+            throw new ForbiddenHttpException('Вы не можете производить данное действие');
+        }
         $this->posts->remove($post);
     }
 }
