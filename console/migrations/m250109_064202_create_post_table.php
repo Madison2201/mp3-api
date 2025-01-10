@@ -18,7 +18,7 @@ class m250109_064202_create_post_table extends Migration
             'description' => $this->text(),
             'file' => $this->binary()->notNull(),
             'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer(),
             'status' => $this->integer()->notNull(),
             'user_id' => $this->integer()->notNull(),
         ]);

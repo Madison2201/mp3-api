@@ -6,12 +6,9 @@ return [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
     'rules' => [
-        '<_a:[\w\-]+>' => 'site/<_a>',
-        '' => 'site/index',
-        '<_a:login|logout>' => 'site/<_a>',
-        '<_c:[\w\-]+>' => '<_c>/index',
-        '<_c:[\w\-]+>/<id:\d+>' => '<_c>/view',
-        '<_c:[\w\-]+>/<_a:[\w-]+>' => '<_c>/<_a>',
-        '<_c:[\w\-]+>/<id:\d+>/<_a:[\w\-]+>' => '<_c>/<_a>',
+        'GET /post' => 'post/index',
+        'POST /post' => 'post/create',
+        'PUT /post/<id:\d+>' => 'post/update',
+        'DELETE /post/<id:\d+>' => 'post/delete',
     ],
 ];

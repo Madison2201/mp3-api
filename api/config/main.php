@@ -35,6 +35,18 @@ return [
                 'multipart/form-data' => 'yii\web\MultipartFormDataParser',
             ]
         ],
+        'response' => [
+            'format' =>'json',
+            'charset' => 'UTF-8',
+            'formatters' => [
+                'json' => [
+                    'class' => 'yii\web\JsonResponseFormatter',
+                    'prettyPrint' => YII_DEBUG,
+                    'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+                ],
+                'xml' => 'yii\web\XmlResponseFormatter',
+            ],
+        ],
         'user' => [
             'identityClass' => 'api\models\User',
             'enableAutoLogin' => true,
@@ -57,10 +69,7 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-        ],
+        'urlManager' => require __DIR__ . '/../../api/config/urlManager.php',
     ],
     'container' => [
         'definitions' => [

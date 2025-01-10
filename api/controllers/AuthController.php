@@ -38,7 +38,7 @@ class AuthController extends Controller
     /**
      * Logs in a user.
      */
-    public function actionLogin()
+    public function actionLogin(): array
     {
         $form = new LoginForm();
         $form->setAttributes(Yii::$app->request->post());
@@ -47,7 +47,6 @@ class AuthController extends Controller
 
         }
 
-        Yii::$app->response->format = Response::FORMAT_JSON;
         return [
             'success' => false,
             'errors' => $form->getErrors(),

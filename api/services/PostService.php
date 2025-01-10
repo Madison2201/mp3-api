@@ -22,6 +22,11 @@ class PostService implements PostServiceInterface
         return $this->posts->getAll();
     }
 
+    public function getPost(int $id)
+    {
+        return $this->posts->getById($id);
+    }
+
     public function create(PostForm $form): Post
     {
         $post = Post::create(
@@ -33,27 +38,20 @@ class PostService implements PostServiceInterface
         return $post;
     }
 
-    public function edit(int $id, PostForm $form): void
+    public function edit(Post $post, PostForm $form): void
     {
-        $post = $this->brands->get($id);
         $post->edit(
-            $form->name,
-            $form->slug,
-            new Meta(
-                $form->meta->title,
-                $form->meta->description,
-                $form->meta->keywords
-            )
+            $form->title,
+            $form->description,
+            $form->file,
+            $form->status
         );
-        $this->brands->save($post);
+        $this->posts->save($post);
     }
 
     public function remove(int $id): void
     {
-        $post = $this->brands->get($id);
-        if ($this->products->existsByBrand($post->id)) {
-            throw new \DomainException('Brand can not be removed, it is already used by other product.');
-        }
-        $this->brands->remove($post);
+        $post = $this->posts->getById($id);
+        $this->posts->remove($post);
     }
 }

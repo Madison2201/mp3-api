@@ -43,4 +43,9 @@ class Post extends ActiveRecord
         $this->status = $status;
         $this->updated_at = time();
     }
+
+    public function extraFields()
+    {
+        return ['title', 'description', 'file'];
+    }
 }
