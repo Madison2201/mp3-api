@@ -85,20 +85,4 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->getSecurity()->validatePassword($password, $this->password_hash);
     }
 
-    public function generateJwt()
-    {
-        $jwt = Yii::$app->jwt;
-        $jwt = Yii::$app->jwt;
-        $key = $jwt->getKey(); // Получаем ключ
-        $time = time();
-
-        $token = $jwt->getBuilder()
-            ->issuedBy('http://your-domain.com') // Источник токена
-            ->permittedFor('http://your-audience.com') // Целевая аудитория
-            ->identifiedBy('4f1g23a12aa') // Уникальный ID токена
-            ->issuedAt($time) // Время выпуска
-            ->expiresAt($time + 3600) // Срок действия токена (1 час)
-            ->getToken($signer, $key); // Подписываем то
-        return $jwt->encode(['id' => $this->id, 'email' => $this->email]);
-    }
 }

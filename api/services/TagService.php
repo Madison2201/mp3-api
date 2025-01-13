@@ -6,11 +6,8 @@ use api\forms\TagForm;
 use api\interface\repositories\TagRepositoryInterface;
 use api\interface\services\TagServiceInterface;
 use api\models\Tag;
-use api\repositories\TagRepository;
 use Throwable;
 use yii\data\ActiveDataProvider;
-use yii\db\StaleObjectException;
-use yii\web\NotFoundHttpException;
 
 class TagService implements TagServiceInterface
 {
@@ -33,9 +30,6 @@ class TagService implements TagServiceInterface
         return $tag;
     }
 
-    /**
-     * @throws NotFoundHttpException
-     */
     public function getTag(int $id): Tag
     {
         return $this->tags->getById($id);

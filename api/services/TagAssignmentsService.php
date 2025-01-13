@@ -7,8 +7,6 @@ use api\interface\repositories\TagAssignmentsRepositoryInterface;
 use api\interface\services\TagAssignmentsServiceInterface;
 use api\models\TagAssignments;
 use Throwable;
-use yii\db\StaleObjectException;
-use yii\web\NotFoundHttpException;
 
 class TagAssignmentsService implements TagAssignmentsServiceInterface
 {
@@ -31,8 +29,6 @@ class TagAssignmentsService implements TagAssignmentsServiceInterface
 
     /**
      * @throws Throwable
-     * @throws StaleObjectException
-     * @throws NotFoundHttpException
      */
     public function detachTag(TagAssignmentsForm $form): void
     {

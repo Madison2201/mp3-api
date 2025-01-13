@@ -93,7 +93,7 @@ class PostController extends Controller
             return [
                 'success' => true,
                 'id' => $post->id,
-                'message' => 'Post updated successfully',
+                'message' => Yii::t('app', 'post_updated_successfully'),
             ];
 
         }
@@ -112,7 +112,7 @@ class PostController extends Controller
         $this->service->remove($id);
         return [
             'success' => true,
-            'message' => 'Post deleted successfully',
+            'message' => Yii::t('app', 'post_deleted_successfully'),
         ];
     }
 }

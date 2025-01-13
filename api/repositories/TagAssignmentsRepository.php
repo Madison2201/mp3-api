@@ -4,6 +4,7 @@ namespace api\repositories;
 
 use api\interface\repositories\TagAssignmentsRepositoryInterface;
 use api\models\TagAssignments;
+use Yii;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
 
@@ -17,7 +18,7 @@ class TagAssignmentsRepository implements TagAssignmentsRepositoryInterface
             }
 
         } catch (\Exception $e) {
-            throw new \RuntimeException('Saving error.');
+            throw new \RuntimeException(Yii::t('app', 'save_error'));
         }
     }
 
@@ -28,7 +29,7 @@ class TagAssignmentsRepository implements TagAssignmentsRepositoryInterface
     public function detach(TagAssignments $assignments): void
     {
         if (!$assignments->delete()) {
-            throw new \RuntimeException('Removing error.');
+            throw new \RuntimeException(Yii::t('app', 'remove_error'));
         }
     }
 
@@ -38,7 +39,7 @@ class TagAssignmentsRepository implements TagAssignmentsRepositoryInterface
     public function getByCondition($condition): TagAssignments
     {
         if (!$assignments = TagAssignments::findOne($condition)) {
-            throw new NotFoundHttpException('Assigment is not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'assignment_not_found'));
         }
         return $assignments;
     }

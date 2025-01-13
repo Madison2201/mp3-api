@@ -6,10 +6,9 @@ use api\forms\PostForm;
 use api\interface\repositories\PostRepositoryInterface;
 use api\interface\services\PostServiceInterface;
 use api\models\Post;
-use api\repositories\PostRepository;
 use Throwable;
+use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\StaleObjectException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
@@ -65,7 +64,7 @@ class PostService implements PostServiceInterface
     {
         $post = $this->posts->getById($id);
         if ($post->user_id !== \Yii::$app->user->id) {
-            throw new ForbiddenHttpException('Вы не можете производить данное действие');
+            throw new ForbiddenHttpException(Yii::t('app', 'forbidden_error'));
         }
         $this->posts->remove($post);
     }

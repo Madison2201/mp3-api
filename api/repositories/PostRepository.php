@@ -5,6 +5,7 @@ namespace api\repositories;
 use api\interface\repositories\PostRepositoryInterface;
 use api\models\Post;
 use Throwable;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
@@ -28,7 +29,7 @@ class PostRepository implements PostRepositoryInterface
     public function getById(int $id): Post
     {
         if (!$post = Post::findOne($id)) {
-            throw new NotFoundHttpException('Post is not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'post_not_found'));
         }
         return $post;
     }
@@ -38,7 +39,7 @@ class PostRepository implements PostRepositoryInterface
         try {
             $post->save();
         } catch (\Exception $e) {
-            throw new \RuntimeException('Saving error.');
+            throw new \RuntimeException(Yii::t('app', 'save_error'));
         }
     }
 
@@ -49,7 +50,7 @@ class PostRepository implements PostRepositoryInterface
     public function remove(Post $post): void
     {
         if (!$post->delete()) {
-            throw new \RuntimeException('Removing error.');
+            throw new \RuntimeException(Yii::t('app', 'remove_error'));
         }
     }
 }

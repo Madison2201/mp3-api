@@ -28,9 +28,21 @@ return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\controllers',
-    'bootstrap' => ['log'],
+    'language' => 'ru-RU',
+    'bootstrap' => ['log', 'languageSelector'],
     'modules' => [],
     'components' => [
+        'languageSelector' => [
+            'class' => 'api\components\LanguageSelector',
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/api/messages',
+                ],
+            ],
+        ],
         'jwt' => [
             'class' => api\components\JwtService::class,
         ],

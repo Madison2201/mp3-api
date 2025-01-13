@@ -5,6 +5,7 @@ namespace api\repositories;
 use api\interface\repositories\TagRepositoryInterface;
 use api\models\Tag;
 use Throwable;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
@@ -21,7 +22,7 @@ class TagRepository implements TagRepositoryInterface
         try {
             $tag->save();
         } catch (\Exception $e) {
-            throw new \RuntimeException('Saving error.');
+            throw new \RuntimeException(Yii::t('app', 'save_error'));
         }
     }
 
@@ -32,7 +33,7 @@ class TagRepository implements TagRepositoryInterface
     public function remove(Tag $tag): void
     {
         if (!$tag->delete()) {
-            throw new \RuntimeException('Removing error.');
+            throw new \RuntimeException(Yii::t('app', 'remove_error'));
         }
     }
 
@@ -42,7 +43,7 @@ class TagRepository implements TagRepositoryInterface
     public function getById(int $id): Tag
     {
         if (!$tag = Tag::findOne($id)) {
-            throw new NotFoundHttpException('Tag is not found.');
+            throw new NotFoundHttpException(Yii::t('app', 'tag_not_found'));
         }
         return $tag;
     }

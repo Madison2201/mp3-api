@@ -3,6 +3,7 @@
 namespace api\forms;
 
 use api\models\Post;
+use Yii;
 use yii\base\Model;
 use yii\web\ForbiddenHttpException;
 
@@ -38,7 +39,7 @@ class PostForm extends Model
             [['title', 'description', 'file'], 'required'],
             [['title', 'description'], 'string', 'max' => 255],
             [['file'], 'file'],
-            [['file'], 'file', 'maxSize' => 20971520, 'tooBig' => 'Размер файла не должен превышать 20 MB.'],
+            [['file'], 'file', 'maxSize' => 20971520, 'tooBig' => Yii::t('app', 'max_size_file')],
             [['created_at', 'updated_at'], 'safe'],
             [['user_id'], 'validateUserId'],
         ];
@@ -50,7 +51,7 @@ class PostForm extends Model
     public function validateUserId($attribute, $params): void
     {
         if ($this->user_id !== \Yii::$app->user->id) {
-            throw new ForbiddenHttpException('Вы не можете производить данное действие');
+            throw new ForbiddenHttpException(Yii::t('app', 'forbidden_error'));
         }
     }
 }

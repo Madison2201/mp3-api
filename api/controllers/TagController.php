@@ -29,7 +29,6 @@ class TagController extends Controller
 
     public function behaviors(): array
     {
-        Yii::$app->language = 'ru';
         return array_merge(
             parent::behaviors(),
             [
@@ -123,7 +122,7 @@ class TagController extends Controller
             return [
                 'success' => true,
                 'id' => $tag->id,
-                'message' => 'Tag updated successfully',
+                'message' => Yii::t('app', 'tag_deleted_successfully'),
             ];
 
         }
@@ -141,7 +140,7 @@ class TagController extends Controller
         $this->service->remove($id);
         return [
             'success' => true,
-            'message' => 'Tag deleted successfully',
+            'message' => Yii::t('app', 'tag_deleted_successfully'),
         ];
     }
 }
