@@ -4,6 +4,7 @@ namespace api\repositories;
 
 use api\interface\repositories\TagRepositoryInterface;
 use api\models\Tag;
+use Throwable;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
@@ -26,7 +27,7 @@ class TagRepository implements TagRepositoryInterface
 
     /**
      * @throws StaleObjectException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function remove(Tag $tag): void
     {

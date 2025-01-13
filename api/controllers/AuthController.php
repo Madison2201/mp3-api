@@ -8,19 +8,19 @@ use common\models\LoginForm;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
-use yii\web\Response;
 
 class AuthController extends Controller
 {
 
-    private AuthService $service;
+    private AuthServiceInterface $service;
 
     public function __construct($id, $module, AuthServiceInterface $service, $config = [])
     {
         parent::__construct($id, $module, $config);
         $this->service = $service;
     }
-    public function behaviors()
+
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),

@@ -2,20 +2,19 @@
 
 namespace api\services;
 
-use api\forms\TagAssignmentsForm;
 use api\forms\TagForm;
 use api\interface\repositories\TagRepositoryInterface;
 use api\interface\services\TagServiceInterface;
 use api\models\Tag;
-use api\models\TagAssignments;
 use api\repositories\TagRepository;
+use Throwable;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
 
 class TagService implements TagServiceInterface
 {
-    private TagRepository $tags;
+    private TagRepositoryInterface $tags;
 
     public function __construct(TagRepositoryInterface $tags)
     {
@@ -51,9 +50,7 @@ class TagService implements TagServiceInterface
     }
 
     /**
-     * @throws StaleObjectException
-     * @throws \Throwable
-     * @throws NotFoundHttpException
+     * @throws Throwable
      */
     public function remove(int $id): void
     {

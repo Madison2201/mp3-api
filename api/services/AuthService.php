@@ -17,7 +17,7 @@ class AuthService implements AuthServiceInterface
         $this->users = $userRepository;
     }
 
-    public function auth(LoginForm $form)
+    public function auth(LoginForm $form): array
     {
 
         $token = Yii::$app->jwt->createToken(['user_id' => $form->getUserId()]);

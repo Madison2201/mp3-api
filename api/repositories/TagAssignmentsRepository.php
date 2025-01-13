@@ -4,6 +4,7 @@ namespace api\repositories;
 
 use api\interface\repositories\TagAssignmentsRepositoryInterface;
 use api\models\TagAssignments;
+use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
 
 class TagAssignmentsRepository implements TagAssignmentsRepositoryInterface

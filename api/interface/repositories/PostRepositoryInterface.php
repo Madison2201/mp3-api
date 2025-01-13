@@ -3,6 +3,7 @@
 namespace api\interface\repositories;
 
 use api\models\Post;
+use yii\data\ActiveDataProvider;
 
 interface PostRepositoryInterface
 {
@@ -11,5 +12,10 @@ interface PostRepositoryInterface
     public function save(Post $post): void;
 
     public function remove(Post $post): void;
+
+    public function search($params): ActiveDataProvider;
+
+    public function getById(int $id): Post;
+
 
 }

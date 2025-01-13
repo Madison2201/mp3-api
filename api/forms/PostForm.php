@@ -16,6 +16,7 @@ class PostForm extends Model
     public $status;
     public $user_id;
     private $_post;
+
     public function __construct(Post $post = null, $config = [])
     {
         if ($post) {
@@ -27,10 +28,11 @@ class PostForm extends Model
             $this->status = $post->status;
             $this->user_id = $post->user_id;
             $this->_post = $post;
-        } 
+        }
         parent::__construct($config);
     }
-    public function rules()
+
+    public function rules(): array
     {
         return [
             [['title', 'description', 'file'], 'required'],
@@ -42,6 +44,9 @@ class PostForm extends Model
         ];
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function validateUserId($attribute, $params): void
     {
         if ($this->user_id !== \Yii::$app->user->id) {

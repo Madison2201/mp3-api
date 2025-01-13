@@ -4,6 +4,7 @@ namespace api\repositories;
 
 use api\interface\repositories\PostRepositoryInterface;
 use api\models\Post;
+use Throwable;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
@@ -21,6 +22,9 @@ class PostRepository implements PostRepositoryInterface
         return $model->search($params);
     }
 
+    /**
+     * @throws NotFoundHttpException
+     */
     public function getById(int $id): Post
     {
         if (!$post = Post::findOne($id)) {
@@ -39,7 +43,7 @@ class PostRepository implements PostRepositoryInterface
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      * @throws StaleObjectException
      */
     public function remove(Post $post): void

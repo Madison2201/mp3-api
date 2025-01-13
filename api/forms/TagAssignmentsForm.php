@@ -6,7 +6,6 @@ use api\models\Post;
 use api\models\Tag;
 use api\models\TagAssignments;
 use yii\base\Model;
-use yii\db\Query;
 
 class TagAssignmentsForm extends Model
 {

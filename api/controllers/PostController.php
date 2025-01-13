@@ -6,17 +6,19 @@ use api\components\JwtAuth;
 use api\forms\PostForm;
 use api\helpers\FileHelper;
 use api\interface\services\PostServiceInterface;
-use api\services\PostService;
+use Exception;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
 
 class PostController extends Controller
 {
 
-    private PostService $service;
+    private PostServiceInterface $service;
 
     public function __construct($id, $module, PostServiceInterface $service, $config = [])
     {
@@ -24,7 +26,7 @@ class PostController extends Controller
         $this->service = $service;
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),
@@ -45,14 +47,14 @@ class PostController extends Controller
         );
     }
 
-    public function actionIndex()
+    public function actionIndex(): ActiveDataProvider
     {
         $params = Yii::$app->request->queryParams;
         return $this->service->getPosts($params);
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function actionCreate(): Response|array
     {
@@ -76,6 +78,9 @@ class PostController extends Controller
 
     }
 
+    /**
+     * @throws Exception
+     */
     public function actionUpdate(int $id): Response|array
     {
         $post = $this->service->getPost($id);
@@ -99,6 +104,9 @@ class PostController extends Controller
 
     }
 
+    /**
+     * @throws ForbiddenHttpException
+     */
     public function actionDelete(int $id): Response|array
     {
         $this->service->remove($id);

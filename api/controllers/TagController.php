@@ -7,8 +7,7 @@ use api\forms\TagAssignmentsForm;
 use api\forms\TagForm;
 use api\interface\services\TagAssignmentsServiceInterface;
 use api\interface\services\TagServiceInterface;
-use api\services\TagAssignmentsService;
-use api\services\TagService;
+use Throwable;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
@@ -18,8 +17,8 @@ use yii\web\NotFoundHttpException;
 
 class TagController extends Controller
 {
-    private TagService $service;
-    private TagAssignmentsService $tagAssignmentsService;
+    private TagServiceInterface $service;
+    private TagAssignmentsServiceInterface $tagAssignmentsService;
 
     public function __construct($id, $module, TagServiceInterface $service, TagAssignmentsServiceInterface $tagAssignmentsService, $config = [])
     {
@@ -52,7 +51,7 @@ class TagController extends Controller
         );
     }
 
-    public function actionAttachTag()
+    public function actionAttachTag(): array
     {
         $form = new TagAssignmentsForm();
         $form->setAttributes(Yii::$app->request->post());
@@ -113,7 +112,7 @@ class TagController extends Controller
         ];
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate($id): array
     {
         $tag = $this->service->getTag($id);
         $form = new TagForm($tag);
@@ -135,16 +134,14 @@ class TagController extends Controller
     }
 
     /**
-     * @throws StaleObjectException
-     * @throws \Throwable
-     * @throws NotFoundHttpException
+     * @throws Throwable
      */
     public function actionDelete($id): array
     {
         $this->service->remove($id);
         return [
             'success' => true,
-            'message' => 'Post deleted successfully',
+            'message' => 'Tag deleted successfully',
         ];
     }
 }

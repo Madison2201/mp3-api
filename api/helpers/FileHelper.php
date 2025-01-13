@@ -2,6 +2,7 @@
 
 namespace api\helpers;
 
+use Exception;
 use FFMpeg\FFMpeg;
 use FFMpeg\Format\Audio\Mp3;
 use Yii;
@@ -12,7 +13,7 @@ class FileHelper
     const string COMPRESSED_PATH = '@runtime/temp/compressed';
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function upload($file): false|string
     {
@@ -27,7 +28,7 @@ class FileHelper
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     private function compressMp3($inputPath, $outputPath): void
     {
@@ -38,8 +39,8 @@ class FileHelper
         $format->setAudioKiloBitrate(128);
         try {
             $audio->save($format, $outputPath);
-        } catch (\Exception $exception) {
-            throw new \Exception("Ошибка сжатия MP3: " . implode("\n", $exception->getMessage()));
+        } catch (Exception $exception) {
+            throw new Exception("Ошибка сжатия MP3: " . implode("\n", $exception->getMessage()));
         }
 
     }
