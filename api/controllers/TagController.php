@@ -10,6 +10,7 @@ use api\interface\services\TagServiceInterface;
 use api\services\TagAssignmentsService;
 use api\services\TagService;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
@@ -86,9 +87,10 @@ class TagController extends Controller
 
     }
 
-    public function actionIndex(): array
+    public function actionIndex(): ActiveDataProvider
     {
-        return $this->service->getAll();
+        $params = Yii::$app->request->queryParams;
+        return $this->service->getAll($params);
     }
 
     public function actionCreate(): array

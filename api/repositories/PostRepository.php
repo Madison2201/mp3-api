@@ -4,6 +4,7 @@ namespace api\repositories;
 
 use api\interface\repositories\PostRepositoryInterface;
 use api\models\Post;
+use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
 
@@ -12,6 +13,12 @@ class PostRepository implements PostRepositoryInterface
     public function getAll(): array
     {
         return Post::find()->all();
+    }
+
+    public function search($params): ActiveDataProvider
+    {
+        $model = new Post();
+        return $model->search($params);
     }
 
     public function getById(int $id): Post

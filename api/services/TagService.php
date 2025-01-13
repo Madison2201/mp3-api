@@ -9,6 +9,7 @@ use api\interface\services\TagServiceInterface;
 use api\models\Tag;
 use api\models\TagAssignments;
 use api\repositories\TagRepository;
+use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
 
@@ -21,9 +22,9 @@ class TagService implements TagServiceInterface
         $this->tags = $tags;
     }
 
-    public function getAll(): array
+    public function getAll($params): ActiveDataProvider
     {
-        return $this->tags->getAll();
+        return $this->tags->search($params);
     }
 
     public function create(TagForm $form): Tag

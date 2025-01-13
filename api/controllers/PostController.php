@@ -45,9 +45,10 @@ class PostController extends Controller
         );
     }
 
-    public function actionIndex(): array
+    public function actionIndex()
     {
-        return $this->service->getPosts();
+        $params = Yii::$app->request->queryParams;
+        return $this->service->getPosts($params);
     }
 
     /**

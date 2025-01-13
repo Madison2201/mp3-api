@@ -4,6 +4,7 @@ namespace api\repositories;
 
 use api\interface\repositories\TagRepositoryInterface;
 use api\models\Tag;
+use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\NotFoundHttpException;
 
@@ -43,5 +44,11 @@ class TagRepository implements TagRepositoryInterface
             throw new NotFoundHttpException('Tag is not found.');
         }
         return $tag;
+    }
+
+    public function search($params): ActiveDataProvider
+    {
+        $tags = new Tag();
+        return $tags->search($params);
     }
 }
