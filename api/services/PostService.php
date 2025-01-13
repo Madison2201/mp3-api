@@ -59,8 +59,6 @@ class PostService implements PostServiceInterface
 
     /**
      * @throws Throwable
-     * @throws StaleObjectException
-     * @throws NotFoundHttpException
      * @throws ForbiddenHttpException
      */
     public function remove(int $id): void

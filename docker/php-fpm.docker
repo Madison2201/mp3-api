@@ -5,12 +5,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     libpq-dev \
     ffmpeg \
-    && docker-php-ext-install zip pdo_pgsql &&\
-    mkdir -p /app/api/runtime/temp && \
-    chmod -R 775 /app/api/runtime/temp && \
-    chown -R www-data:www-data /app/api/runtime/temp && \
-    mkdir -p /app/api/runtime/temp/compressed && \
-    chown -R www-data:www-data /app/api/runtime/temp/compressed && \
-    chmod -R 775 /app/api/runtime/temp/compressed
+    && docker-php-ext-install zip pdo_pgsql \
+    && mkdir -p /app/api/runtime/temp \
+    && chmod -R 775 /app/api/runtime/temp \
+    && mkdir -p /app/api/runtime/temp/compressed \
+    && chmod -R 775 /app/api/runtime/temp/compressed
 
 WORKDIR /app
