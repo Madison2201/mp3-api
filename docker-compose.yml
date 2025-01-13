@@ -9,6 +9,10 @@ services:
       - mp3-php-fpm
     ports:
       - "81:80"
+    networks:
+      customnetwork:
+        ipv4_address: 172.10.0.10
+
   mp3-php-fpm:
     build:
       context: ./docker
@@ -17,6 +21,9 @@ services:
       APP_DEBUG: 1
     volumes:
       - ./:/app
+    networks:
+      customnetwork:
+        ipv4_address: 172.10.0.12
   mp3-php-cli:
     build:
       context: ./docker
@@ -26,6 +33,9 @@ services:
     volumes:
       - ./:/app
       - composer:/root/.composer/cache
+    networks:
+      customnetwork:
+        ipv4_address: 172.10.0.11
   mp3-postgres:
     image: postgres:17.2-alpine
     volumes:
@@ -36,6 +46,14 @@ services:
       POSTGRES_DB: app
     ports:
       - "54321:5432"
+    networks:
+      customnetwork:
+        ipv4_address: 172.10.0.13
 volumes:
   mp3-postgres:
   composer:
+networks:
+  customnetwork:
+    ipam:
+      config:
+        - subnet: 172.10.0.0/16
