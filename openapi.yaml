@@ -1,0 +1,504 @@
+openapi: 3.0.0
+info:
+  title: 'Mp3 api'
+  version: '0.1'
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: 'Авторизация пользователя'
+      description: 'Метод выполняет авторизацию пользователя с использованием предоставленных учетных данных.'
+      operationId: c1405ab8f68723f4d0ffe12b5df1defc
+      requestBody:
+        description: 'Данные для входа'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  example: password123
+              type: object
+      responses:
+        '200':
+          description: 'Успешная авторизация'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  token: { type: string, example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { username: 'Не может быть пустым' } }
+                type: object
+  /post:
+    get:
+      tags:
+        - Posts
+      summary: 'Получить список всех постов'
+      description: 'Возвращает список всех постов с возможностью фильтрации'
+      operationId: 04e500ff916197a1e8bbea36268511f3
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'Номер страницы'
+          required: false
+          schema:
+            type: integer
+            example: 1
+        -
+          name: pageSize
+          in: query
+          description: 'Количество элементов на страницы'
+          required: false
+          schema:
+            type: integer
+            example: 5
+        -
+          name: sort
+          in: query
+          description: Сортировка
+          required: false
+          schema:
+            type: string
+            example: id
+        -
+          name: expand
+          in: query
+          description: 'Расширение запроса'
+          required: false
+          schema:
+            type: string
+            example:
+              - tags
+              - files
+      responses:
+        '200':
+          description: 'Успешный ответ'
+          content:
+            application/json:
+              schema:
+                properties:
+                  id: { type: integer, example: 1 }
+                  title: { type: string, example: testr }
+                  description: { type: string, example: 'Пост успешно обновлен' }
+                  status: { type: integer, example: 1 }
+                  created_at: { type: string, example: '2025-01-13 11:40:00' }
+                type: object
+    post:
+      tags:
+        - Posts
+      summary: 'Создать новый пост'
+      description: 'Создает новый пост на основе переданных данных.'
+      operationId: 1286629e65aaf7d0d2bec97932f7b34f
+      requestBody:
+        description: 'Данные для создания'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - title
+                - description
+                - files
+              properties:
+                title:
+                  type: string
+                  example: Test
+                description:
+                  type: string
+                  example: TestDescription
+                file:
+                  type: mp3
+                  example: test.mp3
+              type: object
+      responses:
+        '200':
+          description: 'Успешное создание'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  id: { type: integer, example: 1 }
+                  title: { type: string, example: Test }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { title: 'Не может быть пустым' } }
+                type: object
+  '/post/{id}':
+    put:
+      tags:
+        - Posts
+      summary: 'Редактирует новый пост'
+      description: 'Редактирует  пост на основе переданных данных.'
+      operationId: 84b9e1756cb15cfe27d1889d62a19ced
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'Id поста'
+          required: false
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: 'Данные для редактирования'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - title
+                - description
+                - files
+              properties:
+                title:
+                  type: string
+                  example: Test
+                description:
+                  type: string
+                  example: TestDescription
+                file:
+                  type: mp3
+                  example: test.mp3
+                status:
+                  type: integer
+                  example: 2
+              type: object
+      responses:
+        '200':
+          description: 'Успешное редактирование'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  id: { type: integer, example: 1 }
+                  message: { type: string, example: 'Пост успешно изменён' }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { title: 'Не может быть пустым' } }
+                type: object
+        '403':
+          description: 'Ошибка доступа'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: integer, example: 403 }
+                  message: { type: string, example: 'Вы не можете производить данное действие' }
+                type: object
+    delete:
+      tags:
+        - Posts
+      summary: 'Удаляет новый пост'
+      description: 'Удаляет  пост '
+      operationId: b51f95579169775b8dfff82897724605
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'Id поста'
+          required: false
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: 'Успешное удаление'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  id: { type: integer, example: 1 }
+                  message: { type: string, example: 'Пост успешно удалён' }
+                type: object
+        '403':
+          description: 'Ошибка доступа'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: integer, example: 403 }
+                  message: { type: string, example: 'Вы не можете производить данное действие' }
+                type: object
+  /tag/attach-tag:
+    post:
+      tags:
+        - Tag
+      summary: 'Прикрепление тэга к посту'
+      description: 'Прикрепление тэга к посту'
+      operationId: f878841572804e03bf1bca100c619658
+      requestBody:
+        description: 'Данные для прикрепление'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - id_post
+                - id_tag
+              properties:
+                id_post:
+                  type: integer
+                  example: 1
+                id_tag:
+                  type: integer
+                  example: 2
+              type: object
+      responses:
+        '200':
+          description: 'Успешный ответ'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { tag_id: 'Tag ID не найден' } }
+                type: object
+  /tag/detach-tag:
+    delete:
+      tags:
+        - Tag
+      summary: 'Открепление тэга от поста'
+      description: 'Открепление тэга от поста'
+      operationId: e095760cccc9f1eedab70327ead66641
+      requestBody:
+        description: 'Данные для открепления'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - id_post
+                - id_tag
+              properties:
+                id_post:
+                  type: integer
+                  example: 1
+                id_tag:
+                  type: integer
+                  example: 2
+              type: object
+      responses:
+        '200':
+          description: 'Успешный ответ'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { tag_id: 'Tag ID не найден' } }
+                type: object
+  /tag:
+    get:
+      tags:
+        - Tag
+      summary: 'Получить список всех тэгов'
+      description: 'Возвращает список всех тэгов с возможностью фильтрации'
+      operationId: 91fb7d06e13fa31094e542c0f866a705
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'Номер страницы'
+          required: false
+          schema:
+            type: integer
+            example: 1
+        -
+          name: pageSize
+          in: query
+          description: 'Количество элементов на страницы'
+          required: false
+          schema:
+            type: integer
+            example: 5
+        -
+          name: sort
+          in: query
+          description: Сортировка
+          required: false
+          schema:
+            type: string
+            example: id
+      responses:
+        '200':
+          description: 'Успешный ответ'
+          content:
+            application/json:
+              schema:
+                properties:
+                  id: { type: integer, example: 1 }
+                  title: { type: string, example: testr }
+                type: object
+    post:
+      tags:
+        - Tag
+      summary: 'Создаёт новый тэг'
+      description: 'Создание нового тэга '
+      operationId: b8bf26b2c8c74e5a43db501ebd23843b
+      requestBody:
+        description: 'Данные для создания'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  example: Test
+              type: object
+      responses:
+        '200':
+          description: 'Успешное удаление'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  id: { type: integer, example: 1 }
+                  title: { type: string, example: testTag }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { title: 'Не может быть пустым' } }
+                type: object
+  '/tag/{id}':
+    put:
+      tags:
+        - Tag
+      summary: 'Изменяет  тэг'
+      description: 'Изменяет  тэг '
+      operationId: fdeff039de4d66c5e032752a74ad9616
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'Id тэга'
+          required: false
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: 'Данные для редактирования'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  example: Test
+              type: object
+      responses:
+        '200':
+          description: 'Успешное изменение'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  id: { type: integer, example: 1 }
+                  message: { type: string, example: 'Тэг успешно изменён' }
+                type: object
+        '400':
+          description: 'Ошибка валидации'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: false }
+                  errors: { type: object, example: { title: 'Не может быть пустым' } }
+                type: object
+    delete:
+      tags:
+        - Tag
+      summary: 'Удаляет  тэг'
+      description: 'Удаляет  тэг '
+      operationId: 7b2a5c6b87f7294b2a7fe783b5406524
+      parameters:
+        -
+          name: id
+          in: query
+          description: 'Id тэга'
+          required: false
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: 'Успешное удаление'
+          content:
+            application/json:
+              schema:
+                properties:
+                  success: { type: boolean, example: true }
+                  id: { type: integer, example: 1 }
+                  message: { type: string, example: 'Тэг успешно удалён' }
+                type: object
+tags:
+  -
+    name: Auth
+    description: Auth
+  -
+    name: Posts
+    description: Posts
+  -
+    name: Tag
+    description: Tag

@@ -7,13 +7,11 @@ use api\forms\TagAssignmentsForm;
 use api\forms\TagForm;
 use api\interface\services\TagAssignmentsServiceInterface;
 use api\interface\services\TagServiceInterface;
-use Throwable;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\StaleObjectException;
 use yii\filters\VerbFilter;
 use yii\rest\Controller;
-use yii\web\NotFoundHttpException;
+use OpenApi\Attributes as OA;
 
 class TagController extends Controller
 {
@@ -50,6 +48,45 @@ class TagController extends Controller
         );
     }
 
+    #[OA\Post(
+        path: '/tag/attach-tag',
+        description: 'Прикрепление тэга к посту',
+        summary: 'Прикрепление тэга к посту',
+        tags: ['Tag'],
+
+    )]
+    #[OA\RequestBody(
+        description: 'Данные для прикрепление',
+        required: true,
+        content: new OA\JsonContent(
+            required: ['id_post', 'id_tag'],
+            properties: [
+                new OA\Property(property: 'id_post', type: 'integer', example: 1),
+                new OA\Property(property: 'id_tag', type: 'integer', example: 2),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Успешный ответ',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+            ],
+            type: 'object'
+        )
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Ошибка валидации',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: false),
+                new OA\Property(property: 'errors', type: 'object', example: ['tag_id' => 'Tag ID не найден'],)
+            ],
+            type: 'object'
+        )
+    )]
     public function actionAttachTag(): array
     {
         $form = new TagAssignmentsForm();
@@ -67,6 +104,45 @@ class TagController extends Controller
 
     }
 
+    #[OA\Delete(
+        path: '/tag/detach-tag',
+        description: 'Открепление тэга от поста',
+        summary: 'Открепление тэга от поста',
+        tags: ['Tag'],
+
+    )]
+    #[OA\RequestBody(
+        description: 'Данные для открепления',
+        required: true,
+        content: new OA\JsonContent(
+            required: ['id_post', 'id_tag'],
+            properties: [
+                new OA\Property(property: 'id_post', type: 'integer', example: 1),
+                new OA\Property(property: 'id_tag', type: 'integer', example: 2),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Успешный ответ',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+            ],
+            type: 'object'
+        )
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Ошибка валидации',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: false),
+                new OA\Property(property: 'errors', type: 'object', example: ['tag_id' => 'Tag ID не найден'],)
+            ],
+            type: 'object'
+        )
+    )]
     public function actionDetachTag(): array
     {
         $form = new TagAssignmentsForm();
@@ -85,12 +161,91 @@ class TagController extends Controller
 
     }
 
+    #[OA\Get(
+        path: '/tag',
+        description: 'Возвращает список всех тэгов с возможностью фильтрации',
+        summary: 'Получить список всех тэгов',
+        tags: ['Tag'],
+        parameters: [
+            new OA\Parameter(
+                name: 'page',
+                description: 'Номер страницы',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'integer', example: 1)
+            ),
+            new OA\Parameter(
+                name: 'pageSize',
+                description: 'Количество элементов на страницы',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'integer', example: 5)
+            ),
+            new OA\Parameter(
+                name: 'sort',
+                description: 'Сортировка',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'string', example: 'id')
+            ),
+        ]
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Успешный ответ',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'id', type: 'integer', example: 1),
+                new OA\Property(property: 'title', type: 'string', example: 'testr'),
+            ],
+            type: 'object'
+        )
+    )]
     public function actionIndex(): ActiveDataProvider
     {
         $params = Yii::$app->request->queryParams;
         return $this->service->getAll($params);
     }
 
+    #[OA\Post(
+        path: '/tag',
+        description: 'Создание нового тэга ',
+        summary: 'Создаёт новый тэг',
+        tags: ['Tag']
+    )]
+    #[OA\RequestBody(
+        description: 'Данные для создания',
+        required: true,
+        content: new OA\JsonContent(
+            required: ['title',],
+            properties: [
+                new OA\Property(property: 'title', type: 'string', example: 'Test'),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Успешное удаление',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(property: 'id', type: 'integer', example: 1),
+                new OA\Property(property: 'title', type: 'string', example: 'testTag'),
+            ],
+            type: 'object'
+        )
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Ошибка валидации',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: false),
+                new OA\Property(property: 'errors', type: 'object', example: ['title' => 'Не может быть пустым'],)
+            ],
+            type: 'object'
+        )
+    )]
     public function actionCreate(): array
     {
         $form = new TagForm();
@@ -111,6 +266,54 @@ class TagController extends Controller
         ];
     }
 
+    #[OA\Put(
+        path: '/tag/{id}',
+        description: 'Изменяет  тэг ',
+        summary: 'Изменяет  тэг',
+        tags: ['Tag'],
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                description: 'Id тэга',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'integer', example: 1)
+            ),
+        ]
+    )]
+    #[OA\RequestBody(
+        description: 'Данные для редактирования',
+        required: true,
+        content: new OA\JsonContent(
+            required: ['title',],
+            properties: [
+                new OA\Property(property: 'title', type: 'string', example: 'Test'),
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Успешное изменение',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(property: 'id', type: 'integer', example: 1),
+                new OA\Property(property: 'message', type: 'string', example: 'Тэг успешно изменён'),
+            ],
+            type: 'object'
+        )
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Ошибка валидации',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: false),
+                new OA\Property(property: 'errors', type: 'object', example: ['title' => 'Не может быть пустым'],)
+            ],
+            type: 'object'
+        )
+    )]
     public function actionUpdate($id): array
     {
         $tag = $this->service->getTag($id);
@@ -122,7 +325,7 @@ class TagController extends Controller
             return [
                 'success' => true,
                 'id' => $tag->id,
-                'message' => Yii::t('app', 'tag_deleted_successfully'),
+                'message' => Yii::t('app', 'tag_updated_successfully'),
             ];
 
         }
@@ -132,9 +335,33 @@ class TagController extends Controller
         ];
     }
 
-    /**
-     * @throws Throwable
-     */
+    #[OA\Delete(
+        path: '/tag/{id}',
+        description: 'Удаляет  тэг ',
+        summary: 'Удаляет  тэг',
+        tags: ['Tag'],
+        parameters: [
+            new OA\Parameter(
+                name: 'id',
+                description: 'Id тэга',
+                in: 'query',
+                required: false,
+                schema: new OA\Schema(type: 'integer', example: 1)
+            ),
+        ]
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Успешное удаление',
+        content: new OA\JsonContent(
+            properties: [
+                new OA\Property(property: 'success', type: 'boolean', example: true),
+                new OA\Property(property: 'id', type: 'integer', example: 1),
+                new OA\Property(property: 'message', type: 'string', example: 'Тэг успешно удалён'),
+            ],
+            type: 'object'
+        )
+    )]
     public function actionDelete($id): array
     {
         $this->service->remove($id);
