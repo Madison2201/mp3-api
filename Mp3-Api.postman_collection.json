@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "675eaae8-17fc-45b1-b369-98fcfb4a5823",
+		"name": "Mp3-Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12053264"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Создание поста",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Language",
+								"value": "en"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}"
+							},
+							{
+								"key": "Cookie",
+								"value": "_csrf=EubAXkGXFHYkwtFN8DtBUnkCBZRGGx8q; advanced-api=h4m6ahb1i578mq9fg9vj42ef8l"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "testr",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testDescr",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1efce88e-2aff-4070-80a5-c2360eed8ed7"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение поста по id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Language",
+								"value": "kz",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}"
+							},
+							{
+								"key": "Cookie",
+								"value": "_csrf=EubAXkGXFHYkwtFN8DtBUnkCBZRGGx8q; advanced-api=h4m6ahb1i578mq9fg9vj42ef8l"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "testrchange",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testDescrsd",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1efce88e-2aff-4070-80a5-c2360eed8ed7"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/post/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех постов",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "5",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "id",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "test",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "created_at",
+									"value": "2025-01-10 10:48:51",
+									"disabled": true
+								},
+								{
+									"key": "expand",
+									"value": "tags",
+									"disabled": true
+								},
+								{
+									"key": "id_tag",
+									"value": "4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение всех постов с тэгами",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/post?expand=tags",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "tags"
+								},
+								{
+									"key": "id_tag",
+									"value": "3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаления поста по id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/post/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"post",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tag",
+			"item": [
+				{
+					"name": "Получение всех тэгов",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/tag",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": "3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание тэга",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"testTag\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tag",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение тэга по id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"changeName\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tag/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление тэга по id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/tag/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Прикрепление тэга к посту",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_post\": 1,\n    \"id_tag\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tag/attach-tag",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"attach-tag"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Открепление тэга от поста",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_post\": 1,\n    \"id_tag\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tag/detach-tag",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tag",
+								"detach-tag"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Авторизация PLATON",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var authData = JSON.parse(responseBody);",
+							"pm.environment.set(\"auth_token\", authData.token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testuser@example.com\",\n    \"password\": \"password123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Авторизация SATURN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "_csrf=LMAVXuiwP17GHMrQ9EfD7Pu0ofEmYty4; advanced-api=nq781lr309rupkrknb5f9qvki0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"testuser2@example.com\",\n    \"password\": \"password123\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "http://172.10.0.10",
+			"type": "string"
+		}
+	]
+}
