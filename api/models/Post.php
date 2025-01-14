@@ -71,7 +71,13 @@ class Post extends ActiveRecord
 
     public function extraFields()
     {
-        return ['tags'];
+        return [
+            'tags',
+            'file' => function () {
+                $audioData = stream_get_contents($this->file);
+                return base64_encode($audioData);
+            } ,
+        ];
     }
 
     public function search(array $params): ActiveDataProvider
